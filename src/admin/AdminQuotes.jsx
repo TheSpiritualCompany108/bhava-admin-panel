@@ -7,7 +7,7 @@ export default function AdminQuotes() {
   const [quotes, setQuotes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [form, setForm] = useState({ text: "", ref: "" });
+  const [form, setForm] = useState({ text: "", ref: "", page: "" });
   const [editingId, setEditingId] = useState(null);
   const navigate = useNavigate();
 
@@ -46,7 +46,7 @@ export default function AdminQuotes() {
   };
 
   const resetForm = () => {
-    setForm({ text: "", ref: "" });
+    setForm({ text: "", ref: "", page: "" });
     setEditingId(null);
   };
 
@@ -76,7 +76,7 @@ export default function AdminQuotes() {
 
   const handleEdit = (q) => {
     setEditingId(q._id);
-    setForm({ text: q.text || "", ref: q.ref || "" });
+    setForm({ text: q.text || "", ref: q.ref || "", page: q.page || "" });
   };
 
   const handleDelete = async (id) => {
@@ -137,6 +137,16 @@ export default function AdminQuotes() {
                 placeholder="e.g., Bhagavad Gita 6:23"
               />
             </div>
+            <div>
+              <label style={{ display: "block", marginBottom: 6, fontSize: 12, fontWeight: 600, color: "#4A0B1D" }}>Page Number</label>
+              <input
+                name="page"
+                value={form.page}
+                onChange={handleChange}
+                style={{ width: "100%", padding: 10, borderRadius: 4, border: "1px solid #ddd", fontSize: 13 }}
+                placeholder="e.g., 45"
+              />
+            </div>
             <div style={{ display: "flex", gap: 10 }}>
               <button type="submit" style={{ flex: 1, padding: 12, background: "#4CAF50", color: "#fff", border: "none", borderRadius: 4, cursor: "pointer", fontWeight: 600, fontSize: 14 }}>
                 {editingId ? "✓ Save Changes" : "✓ Add Quote"}
@@ -168,7 +178,9 @@ export default function AdminQuotes() {
             }}>
               <div style={{ flex: 1 }}>
                 <p style={{ margin: "0 0 6px 0", fontSize: 14, fontStyle: "italic", color: "#333" }}>&ldquo;{q.text}&rdquo;</p>
-                <p style={{ margin: 0, fontSize: 12, fontWeight: 600, color: "#9B3A2A" }}>{q.ref}</p>
+                <p style={{ margin: 0, fontSize: 12, fontWeight: 600, color: "#9B3A2A" }}>
+                  {q.ref}{q.page ? ` · Page ${q.page}` : ""}
+                </p>
               </div>
               <div style={{ display: "flex", gap: 6, flexShrink: 0 }}>
                 <button onClick={() => handleEdit(q)} style={{ padding: "6px 12px", background: "#2196F3", color: "#fff", border: "none", borderRadius: 3, cursor: "pointer", fontSize: 11, fontWeight: 600 }}>Edit</button>
