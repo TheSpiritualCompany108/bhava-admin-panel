@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
@@ -269,7 +269,11 @@ export default function AdminPage() {
     <div style={{ display: "flex", minHeight: "100vh", background: "#f7f4f0" }}>
       {/* TOP NAV */}
       <div style={{ position: "fixed", top: 0, left: 0, right: 0, background: "#fff", borderBottom: "1px solid #e0e0e0", padding: "12px 20px", zIndex: 100, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <h2 style={{ margin: 0, color: "#4A0B1D" }}>Admin Dashboard - {activeCategory}</h2>
+        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
+          <h2 style={{ margin: 0, color: "#4A0B1D" }}>Admin Dashboard - {activeCategory}</h2>
+          <span style={{ color: "#4A0B1D", fontWeight: 700 }}>Tiles</span>
+          <Link to="/quotes" style={{ color: "#E07B39", fontWeight: 600, textDecoration: "none" }}>Quotes</Link>
+        </div>
         <button onClick={logout} style={{ padding: "8px 16px", background: "#E07B39", color: "#fff", border: "none", borderRadius: 4, cursor: "pointer" }}>Logout</button>
       </div>
 
